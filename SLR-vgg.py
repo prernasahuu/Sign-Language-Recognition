@@ -2,8 +2,8 @@ from google.colab import drive
 drive.mount('/content/drive')
 !unzip /content/drive/MyDrive/SLR/archive.zip
 # Importing the Keras libraries and packages
-from tensorflow.keras.applications.resnet50 import ResNet50
 from keras.applications.vgg19 import VGG19
+from keras.application.vgg16 import VGG16
 from tensorflow.keras.models import Model
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.layers import Input, Lambda ,Dense ,Flatten ,Dropout
@@ -57,7 +57,7 @@ X_eval = X_eval.astype('float32')/255.0
 classifier_vgg19= VGG19(input_shape= (64,64,3),include_top=False,weights='imagenet')
 for layer in classifier_vgg19.layers:
   layer.trainable= False
-#VGG19
+#VGG19/VGG16
 classifier= classifier_vgg19.output
 classifier = Flatten()(classifier)#elongating the pooling map
 classifier= Dropout (0.4)(classifier)
